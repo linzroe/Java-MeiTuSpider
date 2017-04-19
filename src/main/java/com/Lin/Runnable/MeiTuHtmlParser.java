@@ -24,9 +24,10 @@ public class MeiTuHtmlParser implements Runnable {
 				list.add("http://www.ydo.tv"+url.substring(url.indexOf("src=\"/")+5, url.lastIndexOf("\" />")));
 			}
 		}
- 
-		for(String imageUrl : list){
-				new Thread(new MeiTuImageCreator(imageUrl,page,title+"/")).start();
+		
+		
+		for (int i = 0; i < list.size(); i++) {
+			new Thread(new MeiTuImageCreator(list.get(i),page,title+"/",i)).start();
 		}
 	}
 }
