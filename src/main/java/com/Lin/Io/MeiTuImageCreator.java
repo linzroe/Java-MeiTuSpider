@@ -40,15 +40,17 @@ public class MeiTuImageCreator implements Runnable {
 
 	@Override
 	public void run() {
-		File dir = new File(basePath+page);
+		File dir = new File(basePath+"/"+page+title);
 		if(!dir.exists()){
 			dir.mkdirs();
 		}
 		
+		System.out.println("basePath:"+basePath+"/"+page+title);
 		
 		String imageName =size+imageUrl.substring(imageUrl.lastIndexOf("."),imageUrl.length());
 		try {
-			File file = new File( basePath+page+"/"+page+"-"+imageName);
+			File file = new File( basePath+"/"+page+title+"/"+page+"-"+imageName);
+			System.out.println("basePath222222:"+ basePath+"/"+page+title+"/"+page+"-"+imageName);
 			OutputStream os = new FileOutputStream(file);
 			//创建一个url对象
 			URL url = new URL(imageUrl);
@@ -68,13 +70,14 @@ public class MeiTuImageCreator implements Runnable {
             os.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				watermarkbk.addImgWatermark(basePath+page+"/"+page+"-"+imageName, basePath+page+"/"+page+"-"+imageName, 100);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
+//		finally {
+//			try {
+//				watermarkbk.addImgWatermark(basePath+page+"/"+page+"-"+imageName, basePath+page+"/"+page+"-"+imageName, 100);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 	
 
